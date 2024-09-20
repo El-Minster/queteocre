@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadrícula Isométrica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Controles a la izquierda (Emojis y Colores en paralelo) -->
+        <div class="controls left">
+            <!-- Selección de Emojis y Colores alineados en paralelo -->
+            <div class="controls-row">
+                <!-- Selección de Emojis -->
+                <div class="sizes">
+                    <h3>TAMAÑO</h3>
+                    <button class="size-button" data-size="S">S</button>
+                    <button class="size-button" data-size="M">M</button>
+                    <button class="size-button" data-size="L">L</button>
+                </div>
+
+                <!-- Selección de Colores -->
+                <div class="colors">
+                    <h3>COLOR</h3>
+                    <button class="color-button" style="background-color: #ff3f3f;" data-color="#ff3f3f"></button>
+                    <button class="color-button" style="background-color: #06a543;" data-color="#06a543"></button>
+                    <button class="color-button" style="background-color: #4aa7ff;" data-color="#4aa7ff"></button>
+                    <button class="color-button" style="background-color: #fdfde1;" data-color="#fdfde1"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cuadrícula Isométrica en el centro -->
+        <div class="iso-grid">
+            <div class="iso-tile" data-index="1"></div>
+            <div class="iso-tile" data-index="2"></div>
+            <div class="iso-tile" data-index="3"></div>
+            <div class="iso-tile" data-index="4"></div>
+            <div class="iso-tile" data-index="5"></div>
+            <div class="iso-tile" data-index="6"></div>
+            <div class="iso-tile" data-index="7"></div>
+            <div class="iso-tile" data-index="8"></div>
+            <div class="iso-tile" data-index="9"></div>
+            <div class="iso-tile" data-index="10"></div>
+            <div class="iso-tile" data-index="11"></div>
+            <div class="iso-tile" data-index="12"></div>
+            <div class="iso-tile" data-index="13"></div>
+            <div class="iso-tile" data-index="14"></div>
+            <div class="iso-tile" data-index="15"></div>
+            <div class="iso-tile" data-index="16"></div>
+            <div class="iso-tile" data-index="17"></div>
+            <div class="iso-tile" data-index="18"></div>
+            <div class="iso-tile" data-index="19"></div>
+            <div class="iso-tile" data-index="20"></div>
+            <div class="iso-tile" data-index="21"></div>
+            <div class="iso-tile" data-index="22"></div>
+            <div class="iso-tile" data-index="23"></div>
+            <div class="iso-tile" data-index="24"></div>
+        </div>
+
+        <!-- Botón de reset -->
+        <div class="controls top">
+            <div class="buttons-container">
+                <button class="reset-button" id="resetButton">RESET</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
