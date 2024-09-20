@@ -55,7 +55,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 10px; /* Espacio entre los grupos de controles */
+    gap: 10px;
     align-items: left;
 }
 
@@ -97,7 +97,7 @@ button:hover {
 .reset-button {
     font-size: 16px;
     padding: 8px 16px;
-    margin-top: -20px; /* Subir un poco el botón */
+    margin-top: -20px;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -113,4 +113,21 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.social-links a {
+    color: #4aa7ff;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
 }
