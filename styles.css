@@ -166,3 +166,11 @@ footer {
 .social-links a:hover {
     text-decoration: underline;
 }
+
+.conflict {
+    position: relative;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 50%, transparent 50%),
+                      linear-gradient(180deg, rgba(0, 0, 0, 0.5) 50%, transparent 50%);
+    background-size: 6px 6px; /* Ajusta el tamaño de las líneas */
+    background-position: 0 0;
+}
