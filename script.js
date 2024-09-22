@@ -1,10 +1,10 @@
 const tiles = document.querySelectorAll('.iso-tile');
 const colorButtons = document.querySelectorAll('.color-button');
 const resetButton = document.getElementById('resetButton');
-const undoButton = document.getElementById('undoButton'); // Asegúrate de que tienes este botón en el HTML
+const undoButton = document.getElementById('undoButton');
 let selectedColor = null;
 let selectedSize = null;
-let history = []; // Para almacenar el estado de las celdas
+let history = [];
 
 function saveTileState(tile) {
     const bgColor = tile.style.backgroundColor;
@@ -21,21 +21,17 @@ function restoreTileState(state) {
         state.tile.removeChild(textSpan);
     }
 
-    // Quitar líneas de conflicto al restaurar
     removeConflictLines(state.tile);
 }
 
-// Añadir líneas sobre las celdas
 function addConflictLines(tile) {
     tile.classList.add('conflict');
 }
 
-// Quitar líneas de conflicto
 function removeConflictLines(tile) {
     tile.classList.remove('conflict');
 }
 
-// Comprueba y maneja los duplicados
 function checkDuplicateTiles() {
     const tileMap = {};
     
@@ -48,7 +44,6 @@ function checkDuplicateTiles() {
             const tileKey = `${bgColor}-${sizeText}`;
 
             if (tileMap[tileKey]) {
-                // Añadir líneas de conflicto
                 addConflictLines(tileMap[tileKey]);
                 addConflictLines(tile);
             } else {
@@ -57,7 +52,6 @@ function checkDuplicateTiles() {
         }
     });
 
-    // Eliminar línea de conflicto de celdas que ya no están en conflicto
     tiles.forEach(tile => {
         const bgColor = tile.style.backgroundColor;
         const sizeSpan = tile.querySelector('span');
@@ -66,18 +60,16 @@ function checkDuplicateTiles() {
         if (bgColor && sizeText) {
             const tileKey = `${bgColor}-${sizeText}`;
             if (!tileMap[tileKey]) {
-                removeConflictLines(tile); // Eliminar línea de conflicto
+                removeConflictLines(tile);
             }
         }
     });
 }
 
-// Evento para seleccionar las celdas
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('iso-tile')) {
         const selectedTile = e.target;
 
-        // Guardar el estado actual antes de cambiar
         saveTileState(selectedTile);
 
         if (selectedColor) {
@@ -95,11 +87,10 @@ document.addEventListener('click', (e) => {
             selectedTile.appendChild(newSpan);
         }
 
-        checkDuplicateTiles(); // Verificar duplicados al seleccionar una celda
+        checkDuplicateTiles();
     }
 });
 
-// Selección de colores
 colorButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         selectedColor = e.target.dataset.color;
@@ -110,27 +101,24 @@ colorButtons.forEach(button => {
     });
 });
 
-// Botón Undo
 undoButton.addEventListener('click', () => {
     if (history.length > 0) {
         const lastState = history.pop();
         restoreTileState(lastState);
 
-        // Revisar si hay duplicados y actualizar el estado
         checkDuplicateTiles();
     }
 });
 
-// Botón Reset
 resetButton.addEventListener('click', () => {
     tiles.forEach(tile => {
         tile.style.backgroundColor = '#a19b5e';
-        removeConflictLines(tile); // Eliminar la clase de conflicto
+        removeConflictLines(tile);
 
         const textSpan = tile.querySelector('span');
         if (textSpan) tile.removeChild(textSpan);
     });
-    history = []; // Limpiar el historial
+    history = [];
     selectedColor = null;
     selectedSize = null;
 });
