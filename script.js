@@ -24,6 +24,8 @@ document.addEventListener('click', (e) => {
             newSpan.style.fontSize = '36px';
             selectedTile.appendChild(newSpan);
         }
+
+        checkDuplicateTiles(); // Llamada para verificar duplicados
     }
 });
 
@@ -48,3 +50,34 @@ resetButton.addEventListener('click', () => {
     selectedColor = null;
     selectedSize = null;
 });
+
+// Nueva función para verificar duplicados
+function checkDuplicateTiles() {
+    const tileMap = {};
+
+    tiles.forEach(tile => {
+        const bgColor = tile.style.backgroundColor;
+        const sizeSpan = tile.querySelector('span');
+        const sizeText = sizeSpan ? sizeSpan.textContent : null;
+
+        if (bgColor && sizeText) {
+            const tileKey = `${bgColor}-${sizeText}`;
+
+            if (tileMap[tileKey]) {
+                // Si ya existe una casilla con el mismo color y tamaño
+                tileMap[tileKey].style.backgroundColor = '#000000'; // Poner negra la primera
+                tile.style.backgroundColor = '#000000'; // Poner negra la actual
+
+                // Eliminar el tamaño de ambas
+                const spanToRemove = tileMap[tileKey].querySelector('span');
+                if (spanToRemove) tileMap[tileKey].removeChild(spanToRemove);
+                
+                const spanToRemoveCurrent = tile.querySelector('span');
+                if (spanToRemoveCurrent) tile.removeChild(spanToRemoveCurrent);
+            } else {
+                // Guardar la primera casilla con ese color y tamaño
+                tileMap[tileKey] = tile;
+            }
+        }
+    });
+}
