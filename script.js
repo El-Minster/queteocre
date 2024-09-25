@@ -1,124 +1,110 @@
-const tiles = document.querySelectorAll('.iso-tile');
-const colorButtons = document.querySelectorAll('.color-button');
-const resetButton = document.getElementById('resetButton');
-const undoButton = document.getElementById('undoButton');
-let selectedColor = null;
-let selectedSize = null;
-let history = [];
+let selectedImage = null;
+const gridItems = document.querySelectorAll('.grid-item');
+const leftItems = document.querySelectorAll('.left-item');
+let actionHistory = [];
 
-function saveTileState(tile) {
-    const bgColor = tile.style.backgroundColor;
-    const sizeSpan = tile.querySelector('span');
-    const sizeText = sizeSpan ? sizeSpan.textContent : null;
+leftItems.forEach(item => {
+    item.addEventListener('click', () => {
+        leftItems.forEach(i => i.classList.remove('selected'));
 
-    history.push({ tile, bgColor, sizeText });
-}
+        item.classList.add('selected');
+        
+        selectedImage = item.getAttribute('data-image');
+    });
+});
 
-function restoreTileState(state) {
-    state.tile.style.backgroundColor = state.bgColor;
-    const textSpan = state.tile.querySelector('span');
-    if (textSpan) {
-        state.tile.removeChild(textSpan);
-    }
+gridItems.forEach(item => {
+    item.addEventListener('click', () => {
+        if (selectedImage) {
+            const existingImg = item.querySelector('img');
 
-    removeConflictLines(state.tile);
-}
-
-function addConflictLines(tile) {
-    tile.classList.add('conflict');
-}
-
-function removeConflictLines(tile) {
-    tile.classList.remove('conflict');
-}
-
-function checkDuplicateTiles() {
-    const tileMap = {};
-    
-    tiles.forEach(tile => {
-        const bgColor = tile.style.backgroundColor;
-        const sizeSpan = tile.querySelector('span');
-        const sizeText = sizeSpan ? sizeSpan.textContent : null;
-
-        if (bgColor && sizeText) {
-            const tileKey = `${bgColor}-${sizeText}`;
-
-            if (tileMap[tileKey]) {
-                addConflictLines(tileMap[tileKey]);
-                addConflictLines(tile);
+            if (existingImg) {
+                existingImg.src = `img/${selectedImage}.png`;
+                item.setAttribute('data-image', selectedImage);
+                
+                actionHistory.push({ type: 'replace', item: item, previousImage: existingImg.src, newImage: selectedImage });
             } else {
-                tileMap[tileKey] = tile;
+                const img = document.createElement('img');
+                img.src = `img/${selectedImage}.png`;
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.transform = 'rotate(-45deg)';
+                item.appendChild(img);
+                item.setAttribute('data-image', selectedImage);
+
+                actionHistory.push({ type: 'place', item: item, image: selectedImage });
             }
+
+            checkForMatch();
+        }
+    });
+});
+
+function checkForMatch() {
+    const filledItems = [...gridItems].filter(item => item.querySelector('img'));
+
+    const imageCount = {};
+
+    filledItems.forEach(item => {
+        const image = item.getAttribute('data-image');
+        if (imageCount[image]) {
+            imageCount[image].push(item);
+        } else {
+            imageCount[image] = [item];
         }
     });
 
-    tiles.forEach(tile => {
-        const bgColor = tile.style.backgroundColor;
-        const sizeSpan = tile.querySelector('span');
-        const sizeText = sizeSpan ? sizeSpan.textContent : null;
+    Object.keys(imageCount).forEach(image => {
+        if (imageCount[image].length === 2) {
+            imageCount[image].forEach(item => {
+                item.style.backgroundColor = 'black';
 
-        if (bgColor && sizeText) {
-            const tileKey = `${bgColor}-${sizeText}`;
-            if (!tileMap[tileKey]) {
-                removeConflictLines(tile);
-            }
+                const xImg = document.createElement('img');
+                xImg.src = 'img/x.png';
+                xImg.classList.add('overlay');
+                xImg.style.opacity = '0.5';
+                xImg.style.position = 'absolute';
+                xImg.style.width = '30px';
+                xImg.style.height = '30px';
+                xImg.style.top = '5px';
+                xImg.style.right = '5px';
+                item.appendChild(xImg);
+                actionHistory.push({ type: 'overlay', item: item, image: 'x' });
+            });
         }
     });
 }
 
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('iso-tile')) {
-        const selectedTile = e.target;
+document.getElementById('reset').addEventListener('click', () => {
+    gridItems.forEach(item => {
+        item.innerHTML = '';
+        item.removeAttribute('data-image');
+        item.style.backgroundColor = '';
+    });
 
-        saveTileState(selectedTile);
+    leftItems.forEach(i => i.classList.remove('selected'));
+    selectedImage = null;
+    actionHistory = [];
+});
 
-        if (selectedColor) {
-            selectedTile.style.backgroundColor = selectedColor;
-        }
+document.getElementById('undo').addEventListener('click', () => {
+    if (actionHistory.length > 0) {
+        const lastAction = actionHistory.pop();
 
-        if (selectedSize) {
-            const existingSpan = selectedTile.querySelector('span');
-            if (existingSpan) {
-                selectedTile.removeChild(existingSpan);
+        if (lastAction.type === 'place') {
+            lastAction.item.innerHTML = '';
+            lastAction.item.removeAttribute('data-image');
+            lastAction.item.style.backgroundColor = '';
+        } else if (lastAction.type === 'replace') {
+            const img = lastAction.item.querySelector('img');
+            img.src = lastAction.previousImage;
+            lastAction.item.setAttribute('data-image', lastAction.previousImage.split('/').pop().split('.')[0]);
+        } else if (lastAction.type === 'overlay') {
+            const overlayImg = lastAction.item.querySelector('.overlay');
+            if (overlayImg) {
+                overlayImg.remove();
             }
-            const newSpan = document.createElement('span');
-            newSpan.textContent = selectedSize;
-            newSpan.style.fontSize = '36px';
-            selectedTile.appendChild(newSpan);
+            lastAction.item.style.backgroundColor = '';
         }
-
-        checkDuplicateTiles();
     }
-});
-
-colorButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        selectedColor = e.target.dataset.color;
-        selectedSize = e.target.dataset.size;
-
-        colorButtons.forEach(btn => btn.style.border = 'none');
-        e.target.style.border = '2px solid black';
-    });
-});
-
-undoButton.addEventListener('click', () => {
-    if (history.length > 0) {
-        const lastState = history.pop();
-        restoreTileState(lastState);
-
-        checkDuplicateTiles();
-    }
-});
-
-resetButton.addEventListener('click', () => {
-    tiles.forEach(tile => {
-        tile.style.backgroundColor = '#a19b5e';
-        removeConflictLines(tile);
-
-        const textSpan = tile.querySelector('span');
-        if (textSpan) tile.removeChild(textSpan);
-    });
-    history = [];
-    selectedColor = null;
-    selectedSize = null;
 });

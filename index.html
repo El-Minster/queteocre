@@ -3,73 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOPS FERIA TROLL</title>
+    <title>Blop Memory FT | By: Noel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <div class="container">
-        <div class="controls left">
-            <div class="sizes-colors">
-                <h3></h3>
-                <div class="column">
-                    <button class="size-button" data-size="S">S</button>
-                    <button class="color-button" style="background-color: #ff3f3f;" data-size="S" data-color="#ff3f3f"></button>
-                    <button class="color-button" style="background-color: #06a543;" data-size="S" data-color="#06a543"></button>
-                    <button class="color-button" style="background-color: #4aa7ff;" data-size="S" data-color="#4aa7ff"></button>
-                    <button class="color-button" style="background-color: #f7f7cf;" data-size="S" data-color="#f7f7cf"></button>
-                </div>
-                <div class="column">
-                    <button class="size-button" data-size="M">M</button>
-                    <button class="color-button" style="background-color: #ff3f3f;" data-size="M" data-color="#ff3f3f"></button>
-                    <button class="color-button" style="background-color: #06a543;" data-size="M" data-color="#06a543"></button>
-                    <button class="color-button" style="background-color: #4aa7ff;" data-size="M" data-color="#4aa7ff"></button>
-                    <button class="color-button" style="background-color: #f7f7cf;" data-size="M" data-color="#f7f7cf"></button>
-                </div>
-                <div class="column">
-                    <button class="size-button" data-size="L">L</button>
-                    <button class="color-button" style="background-color: #ff3f3f;" data-size="L" data-color="#ff3f3f"></button>
-                    <button class="color-button" style="background-color: #06a543;" data-size="L" data-color="#06a543"></button>
-                    <button class="color-button" style="background-color: #4aa7ff;" data-size="L" data-color="#4aa7ff"></button>
-                    <button class="color-button" style="background-color: #f7f7cf;" data-size="L" data-color="#f7f7cf"></button>
-                </div>
-            </div>
+        <div class="left-panel">
+            <div class="left-item" data-image="bug3"><img src="img/bug3.png" alt="bug3"></div>
+            <div class="left-item" data-image="bug1"><img src="img/bug1.png" alt="bug1"></div>
+            <div class="left-item" data-image="bug8"><img src="img/bug8.png" alt="bug8"></div>
+            <div class="left-item" data-image="bug5"><img src="img/bug5.png" alt="bug5"></div>
+            <div class="left-item" data-image="bug11"><img src="img/bug11.png" alt="bug11"></div>
+            <div class="left-item" data-image="bug12"><img src="img/bug12.png" alt="bug12"></div>
+            <div class="left-item" data-image="bug4"><img src="img/bug4.png" alt="bug4"></div>
+            <div class="left-item" data-image="bug9"><img src="img/bug9.png" alt="bug9"></div>
+            <div class="left-item" data-image="bug10"><img src="img/bug10.png" alt="bug10"></div>
+            <div class="left-item" data-image="bug2"><img src="img/bug2.png" alt="bug2"></div>
+            <div class="left-item" data-image="bug6"><img src="img/bug6.png" alt="bug6"></div>
+            <div class="left-item" data-image="bug7"><img src="img/bug7.png" alt="bug7"></div>
 
-            <div class="undo-container">
-                <button class="undo-button" id="undoButton">&#x2190;</button>
+            <div class="buttons">
+                <button id="undo">Undo</button>
+                <button id="reset">Reset</button>
             </div>
         </div>
 
-        <div class="iso-grid">
-            <div class="iso-tile" data-index="1"></div>
-            <div class="iso-tile" data-index="2"></div>
-            <div class="iso-tile" data-index="3"></div>
-            <div class="iso-tile" data-index="4"></div>
-            <div class="iso-tile" data-index="5"></div>
-            <div class="iso-tile" data-index="6"></div>
-            <div class="iso-tile" data-index="7"></div>
-            <div class="iso-tile" data-index="8"></div>
-            <div class="iso-tile" data-index="9"></div>
-            <div class="iso-tile" data-index="10"></div>
-            <div class="iso-tile" data-index="11"></div>
-            <div class="iso-tile" data-index="12"></div>
-            <div class="iso-tile" data-index="13"></div>
-            <div class="iso-tile" data-index="14"></div>
-            <div class="iso-tile" data-index="15"></div>
-            <div class="iso-tile" data-index="16"></div>
-            <div class="iso-tile" data-index="17"></div>
-            <div class="iso-tile" data-index="18"></div>
-            <div class="iso-tile" data-index="19"></div>
-            <div class="iso-tile" data-index="20"></div>
-            <div class="iso-tile" data-index="21"></div>
-            <div class="iso-tile" data-index="22"></div>
-            <div class="iso-tile" data-index="23"></div>
-            <div class="iso-tile" data-index="24"></div>
-        </div>
-
-        <div class="controls top">
-            <div class="buttons-container">
-                <button class="reset-button" id="resetButton">RESET</button>
-            </div>
+        <div class="grid-container">
+            <div class="grid-item" data-position="1"></div>
+            <div class="grid-item" data-position="2"></div>
+            <div class="grid-item" data-position="3"></div>
+            <div class="grid-item" data-position="4"></div>
+            <div class="grid-item" data-position="5"></div>
+            <div class="grid-item" data-position="6"></div>
+            <div class="grid-item" data-position="7"></div>
+            <div class="grid-item" data-position="8"></div>
+            <div class="grid-item" data-position="9"></div>
+            <div class="grid-item" data-position="10"></div>
+            <div class="grid-item" data-position="11"></div>
+            <div class="grid-item" data-position="12"></div>
+            <div class="grid-item" data-position="13"></div>
+            <div class="grid-item" data-position="14"></div>
+            <div class="grid-item" data-position="15"></div>
+            <div class="grid-item" data-position="16"></div>
+            <div class="grid-item" data-position="17"></div>
+            <div class="grid-item" data-position="18"></div>
+            <div class="grid-item" data-position="19"></div>
+            <div class="grid-item" data-position="20"></div>
+            <div class="grid-item" data-position="21"></div>
+            <div class="grid-item" data-position="22"></div>
+            <div class="grid-item" data-position="23"></div>
+            <div class="grid-item" data-position="24"></div>
         </div>
     </div>
 
