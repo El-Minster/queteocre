@@ -1,0 +1,196 @@
+body {
+    font-family: Helvetica;
+    background-color: #2c2c2c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 20px;
+    align-items: center;
+}
+
+.iso-grid {
+    position: relative;
+    width: 650px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(6, 100px);
+    grid-auto-rows: 100px;
+    transform: rotateX(0deg) rotateZ(55deg);
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.iso-tile {
+    width: 70px;
+    height: 70px;
+    background-color: #a19b5e;
+    border: 9px solid #7e7754;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iso-tile span {
+    display: block;
+    text-align: center;
+    font-size: 60px;
+}
+
+.controls.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sizes-colors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.color-button {
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0;
+    position: relative;
+}
+
+.color-button::before {
+    content: attr(data-size);
+    font-size: 20px;
+    color: rgb(27, 27, 27);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    font-weight: bold;
+}
+
+button {
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #718a6f;
+}
+
+.color-button {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    color: white;
+}
+
+.reset-button {
+    font-size: 16px;
+    padding: 8px 16px;
+    margin-top: -20px;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #adadad;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.undo-button {
+    font-size: 24px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.undo-button:hover {
+    background-color: #adadad;
+}
+
+.undo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+footer {
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Para mantener su posición */
+}
+
+.author {
+    font-weight: bold;
+}
+
+.social-links a {
+    color: #4aa7ff;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+.conflict {
+    position: relative;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 50%, transparent 50%),
+                      linear-gradient(180deg, rgba(0, 0, 0, 0.5) 50%, transparent 50%);
+    background-size: 6px 6px;
+    background-position: 0 0;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff; /* Color verde */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: background-color 0.3s;
+    width: fit-content; /* Ajusta el ancho del botón según el contenido */
+}
+
+.boton:hover {
+    background-color: #adadad; /* Color verde más oscuro al pasar el mouse */
+}
