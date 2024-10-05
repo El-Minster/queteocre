@@ -55,7 +55,7 @@ function checkForMatch() {
     });
 
     Object.keys(imageCount).forEach(image => {
-        if (imageCount[image].length === 8) {
+        if (imageCount[image].length === 9999) {
             imageCount[image].forEach(item => {
                 item.style.backgroundColor = 'black';
 
