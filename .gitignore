@@ -1,0 +1,7 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/queteocre/FileContentIndex/0b0c7e6f-7164-410e-85cb-647eac78c6a2.vsidx
+*.vsidx
+/.vs/queteocre/v17/DocumentLayout.json
