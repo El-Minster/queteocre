@@ -112,6 +112,18 @@ button:hover {
         background-color: transparent; /* Cases vides pour maintenir la grille carrée */
         border: none;
 }
+    .grid-item.ldv {
+        width: 50px;
+        height: 50px;
+        background-color: #fff2b7;
+        border: 1px solid #444;
+        box-shadow: inset 0 0 0 2px black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
 
     .grid-item.hidden {
         visibility: hidden;
